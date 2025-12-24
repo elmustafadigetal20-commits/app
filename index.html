@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DigiManager | إدارة التسويق الرقمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+          // Initialize EmailJS with your Public Key
+          // REPLACE 'YOUR_PUBLIC_KEY' WITH THE KEY FROM EMAILJS DASHBOARD
+          // Example: emailjs.init("user_XyZ123...");
+          // We will handle the init inside the React component for better control, 
+          // but loading the script here ensures it's available.
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Tajawal', 'sans-serif'],
+            },
+            colors: {
+              // Override 'blue' to use our dynamic primary CSS variables
+              blue: {
+                50: 'rgb(var(--color-primary-50) / <alpha-value>)',
+                100: 'rgb(var(--color-primary-100) / <alpha-value>)',
+                200: 'rgb(var(--color-primary-200) / <alpha-value>)',
+                300: 'rgb(var(--color-primary-300) / <alpha-value>)',
+                400: 'rgb(var(--color-primary-400) / <alpha-value>)',
+                500: 'rgb(var(--color-primary-500) / <alpha-value>)',
+                600: 'rgb(var(--color-primary-600) / <alpha-value>)',
+                700: 'rgb(var(--color-primary-700) / <alpha-value>)',
+                800: 'rgb(var(--color-primary-800) / <alpha-value>)',
+                900: 'rgb(var(--color-primary-900) / <alpha-value>)',
+                950: 'rgb(var(--color-primary-950) / <alpha-value>)',
+              },
+              // Override 'indigo' to use our dynamic secondary CSS variables
+              indigo: {
+                50: 'rgb(var(--color-secondary-50) / <alpha-value>)',
+                100: 'rgb(var(--color-secondary-100) / <alpha-value>)',
+                200: 'rgb(var(--color-secondary-200) / <alpha-value>)',
+                300: 'rgb(var(--color-secondary-300) / <alpha-value>)',
+                400: 'rgb(var(--color-secondary-400) / <alpha-value>)',
+                500: 'rgb(var(--color-secondary-500) / <alpha-value>)',
+                600: 'rgb(var(--color-secondary-600) / <alpha-value>)',
+                700: 'rgb(var(--color-secondary-700) / <alpha-value>)',
+                800: 'rgb(var(--color-secondary-800) / <alpha-value>)',
+                900: 'rgb(var(--color-secondary-900) / <alpha-value>)',
+                950: 'rgb(var(--color-secondary-950) / <alpha-value>)',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for better aesthetics */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+      
+      @media print {
+        body {
+          margin: 0;
+          padding: 0;
+          background: white !important;
+          overflow: visible !important;
+        }
+        /* Hide everything by default */
+        body > * {
+          display: none !important;
+        }
+        /* Only show the invoice modal container, but treat it as the main content */
+        body > div#root {
+            display: block !important;
+        }
+        /* Hide all UI within root except the invoice */
+        #root > * {
+            display: none !important;
+        }
+        /* We need to target the portal/modal specifically if it exists outside root, or inside */
+        /* Since our modal is inside, we need a specific class on the invoice */
+        
+        .no-print {
+            display: none !important;
+        }
+
+        /* Force the specific invoice container to show */
+        #invoice-print {
+          display: block !important;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none !important;
+          background-color: white !important;
+          color: black !important;
+          z-index: 9999;
+          visibility: visible !important;
+          page-break-after: avoid;
+          page-break-before: avoid;
+        }
+        
+        /* Ensure background colors/images print */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased transition-colors duration-200 dark:bg-slate-900 dark:text-slate-100">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
